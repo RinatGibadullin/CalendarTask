@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title
+      | Calendar
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css'
+  body
+    .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-5.text-white.border[style="background: #2F4F4F; box-shadow: 0 0 15px rgba(0, 0, 0, 0.5)"]
+      h1.my-0.mr-md-auto.font-weight-bold style="font-family: 'Lucida Grande';"
+        | Calendar
+      - if user_signed_in?
+        h2
+          = link_to profile_path, class: "btn btn-primary text-white"
+            i.fa.fa-user
+            |  
+            = current_user.username
+        h2
+          = link_to 'log out', destroy_user_session_path, method: :delete, class: "btn btn-outline-primary text-white"
+      - else
+        h2
+          = link_to 'sign up', new_user_registration_path, class: "btn btn-outline-primary text-white"
+        h2
+          = link_to 'sign in', new_user_session_path, class: "btn btn-primary text-white"
+    .container
+      p.notice
+        = notice
+      p.alert
+        = alert
+      = yield
