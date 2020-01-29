@@ -1,0 +1,13 @@
+p#notice
+  = notice
+p
+  strong
+    | Title:
+  = @event.title
+p
+  strong
+    | Event datetime:
+  = @event.event_datetime
+= link_to 'Edit', edit_event_path(@event)
+|  | 
+= link_to 'Back', events_path

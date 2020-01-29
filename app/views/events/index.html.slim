@@ -1,0 +1,28 @@
+p#notice
+  = notice
+h1
+  | Events
+- @events.order("event_datetime ASC").each do |event|
+  .card.border-info.mb-3
+    .card-header
+      .row
+        div.col-md-4.text-left
+          = event.event_datetime.strftime("%B %d, %Y")
+    .card-body
+      .row
+        div.col-md-1.text.left
+          = event.event_datetime.strftime("%H:%M")
+        div.col-md-1
+          |  - 
+        div.col-md-4
+          = event.title
+        div.col-md-1
+          p
+            = link_to 'info', event, class: "btn btn-outline-primary"
+        div.col-md-1
+          p
+            = link_to 'edit', edit_event_path(event), class: "btn btn-outline-primary"
+        div.col-md-1
+          p
+            = link_to 'delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+= link_to 'New Event', new_event_path

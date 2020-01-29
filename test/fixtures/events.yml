@@ -2,8 +2,8 @@
 
 one:
   title: MyString
-  eventDate: 2020-01-27
+  event_datetime: 2020-01-29 08:03:40
 
 two:
   title: MyString
-  eventDate: 2020-01-27
+  event_datetime: 2020-01-29 08:03:40
