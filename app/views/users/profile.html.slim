@@ -1,7 +1,12 @@
 p#notice
   = notice
-
-= link_to 'New Event', new_event_path, class: "btn btn-primary text-white"
+.row
+  div.col-md-6.text.left
+    = link_to new_event_path, class: "btn btn-primary text-white"
+      i.fa.fa-calendar
+      |  New event
+  div.col-md-6.text.right
+    = link_to 'Open general calendar', events_path, class: "btn btn-primary text-white"
 h1
   | My calendar
 - if @grouped_events.present? && @grouped_events[true].present?
@@ -21,13 +26,16 @@ h1
             = event.title
           div.col-md-1
             p
-              = link_to 'info', event, class: "btn btn-outline-primary"
+              = link_to event, class: "btn btn-outline-primary"
+                i.fa.fa-info
           div.col-md-1
             p
-              = link_to 'edit', edit_event_path(event), class: "btn btn-outline-primary"
+              = link_to edit_event_path(event), class: "btn btn-outline-primary"
+                i.fa.fa-edit
           div.col-md-1
             p
-              = link_to 'delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+              = link_to event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger text-white"
+                i.fa.fa-trash
 
 /! Month wise grouped messages
 - if @month_wise_sorted_alerts.present?
@@ -48,13 +56,16 @@ h1
             = event.title
           div.col-md-1
             p
-              = link_to 'info', event, class: "btn btn-outline-primary"
+              = link_to event, class: "btn btn-outline-primary"
+                i.fa.fa-info
           div.col-md-1
             p
-              = link_to 'edit', edit_event_path(event), class: "btn btn-outline-primary"
+              = link_to edit_event_path(event), class: "btn btn-outline-primary"
+                i.fa.fa-edit
           div.col-md-1
             p
-              = link_to 'delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+              = link_to event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger text-white"
+                i.fa.fa-trash
       br/
     br/
 

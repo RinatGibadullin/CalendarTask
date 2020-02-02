@@ -21,11 +21,13 @@ h1
             = event.title
           div.col-md-1
             p
-              = link_to 'info', event, class: "btn btn-outline-primary"
+              = link_to event, class: "btn btn-outline-primary"
+                i.fa.fa-info
           - if signed_in? && (current_user.id == event.user_id) 
             div.col-md-1
               p
-                = link_to 'edit', edit_event_path(event), class: "btn btn-outline-primary"
+                = link_to edit_event_path(event), class: "btn btn-outline-primary"
+                  i.fa.fa-edit
             div.col-md-1
               p
                 = link_to 'delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
@@ -49,11 +51,13 @@ h1
             = event.title
           div.col-md-1
             p
-              = link_to 'info', event, class: "btn btn-outline-primary"
+              = link_to event, class: "btn btn-outline-primary"
+                i.fa.fa-info
           - if signed_in? && (current_user.id == event.user_id) 
             div.col-md-1
               p
-                = link_to 'edit', edit_event_path(event), class: "btn btn-outline-primary"
+                = link_to edit_event_path(event), class: "btn btn-outline-primary"
+                  i.fa.fa-edit
             div.col-md-1
               p
                 = link_to 'delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"

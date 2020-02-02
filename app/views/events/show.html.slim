@@ -1,13 +1,19 @@
 p#notice
   = notice
-p
-  strong
-    | Title:
-  = @event.title
-p
-  strong
-    | Event datetime:
-  = @event.event_datetime
-= link_to 'Edit', edit_event_path(@event)
-|  | 
-= link_to 'Back', events_path
+= link_to 'Open general calendar', events_path, class: "btn btn-primary text-white"
+.card.border-info.mb-3
+    .card-header.row
+        div.col-md-4.text-left
+    	    = @event.event_datetime.strftime("%A, %d %b %H:%M")
+    .card-body
+        .row 
+          div.col-md-6
+          	| Title: 
+            = @event.title
+          - if signed_in? && (current_user.id == @event.user_id) 
+            div.col-md-1
+              p
+                = link_to 'edit', edit_event_path(@event), class: "btn btn-outline-primary"
+            div.col-md-1
+              p
+                = link_to 'delete', @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
