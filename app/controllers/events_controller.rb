@@ -5,6 +5,13 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    #Retrives all messages and divides into two groups todays messages and other messages
+    @grouped_events = @events.group_by{ |t| t.event_datetime.to_date == DateTime.now.to_date }
+
+    if @grouped_events[false].present?
+      #Create month wise groups of messages      
+      @month_wise_sorted_alerts  = @grouped_events[false].group_by{ |t| t.event_datetime.to_date}
+    end 
   end
 
   # GET /events/1
@@ -24,7 +31,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    # @event = Event.new(event_params)
+    @event = current_user.events.build(event_params)
 
     respond_to do |format|
       if @event.save

@@ -1,8 +1,8 @@
-= simple_form_for(@event) do |f|
-  = f.error_notification
-  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-  .form-inputs
-    = f.input :title
-    = f.input :event_datetime
-  .form-actions
-    = f.button :submit
+= form_for(@event) do |f|
+  .form-group
+  	= f.label :title
+    = f.text_field :title, autofocus: true, class: "form-control"
+  .form-group
+    = f.datetime_select :event_datetime, class: "form-control"
+  .actions
+    = f.submit "Save", class: "btn btn-primary"

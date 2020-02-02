@@ -1,28 +1,62 @@
 p#notice
   = notice
+
+= link_to 'New Event', new_event_path, class: "btn btn-primary text-white"
 h1
   | Events
-- @events.order("event_datetime ASC").each do |event|
+- if @grouped_events.present? && @grouped_events[true].present?
   .card.border-info.mb-3
-    .card-header
-      .row
-        div.col-md-4.text-left
-          = event.event_datetime.strftime("%B %d, %Y")
-    .card-body
-      .row
-        div.col-md-1.text.left
-          = event.event_datetime.strftime("%H:%M")
-        div.col-md-1
-          |  - 
-        div.col-md-4
-          = event.title
-        div.col-md-1
-          p
-            = link_to 'info', event, class: "btn btn-outline-primary"
-        div.col-md-1
-          p
-            = link_to 'edit', edit_event_path(event), class: "btn btn-outline-primary"
-        div.col-md-1
-          p
-            = link_to 'delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
-= link_to 'New Event', new_event_path
+      .card-header
+        .row
+          div.col-md-4.text-left
+            | Today
+  - @grouped_events[true].each do |event|
+      .card-body
+        .row
+          div.col-md-1.text.left
+            = event.event_datetime.strftime("%H:%M")
+          div.col-md-1
+            |  - 
+          div.col-md-4
+            = event.title
+          div.col-md-1
+            p
+              = link_to 'info', event, class: "btn btn-outline-primary"
+          - if signed_in? && (current_user.id == event.user_id) 
+            div.col-md-1
+              p
+                = link_to 'edit', edit_event_path(event), class: "btn btn-outline-primary"
+            div.col-md-1
+              p
+                = link_to 'delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+
+/! Month wise grouped messages
+- if @month_wise_sorted_alerts.present?
+  - @month_wise_sorted_alerts.each do |hash_elements|
+    .card.border-info.mb-3
+      .card-header
+        .row
+          div.col-md-4.text-left
+            = hash_elements.first.strftime("%A, %d %b")
+    - hash_elements.last.each do |event|
+      .card-body
+        .row
+          div.col-md-1.text.left
+            = event.event_datetime.strftime("%H:%M")
+          div.col-md-1
+            |  - 
+          div.col-md-4
+            = event.title
+          div.col-md-1
+            p
+              = link_to 'info', event, class: "btn btn-outline-primary"
+          - if signed_in? && (current_user.id == event.user_id) 
+            div.col-md-1
+              p
+                = link_to 'edit', edit_event_path(event), class: "btn btn-outline-primary"
+            div.col-md-1
+              p
+                = link_to 'delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+
+      br/
+    br/
