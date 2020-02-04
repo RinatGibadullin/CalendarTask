@@ -2,9 +2,10 @@ p#notice
   = notice
 = link_to 'Open general calendar', events_path, class: "btn btn-primary text-white"
 .card.border-info.mb-3
-    .card-header.row
-        div.col-md-4.text-left
-    	    = @event.event_datetime.strftime("%A, %d %b %H:%M")
+    .card-header
+    	.row
+        	div.col-md-4.text-left
+    	    	= @event.event_datetime.strftime("%A, %d %b %H:%M")
     .card-body
         .row 
           div.col-md-6
@@ -13,7 +14,9 @@ p#notice
           - if signed_in? && (current_user.id == @event.user_id) 
             div.col-md-1
               p
-                = link_to 'edit', edit_event_path(@event), class: "btn btn-outline-primary"
+                = link_to edit_event_path(@event), class: "btn btn-outline-primary"
+                  i.fa.fa-edit
             div.col-md-1
               p
-                = link_to 'delete', @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+                = link_to @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger text-white"
+                  i.fa.fa-trash

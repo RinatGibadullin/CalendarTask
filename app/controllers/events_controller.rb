@@ -1,17 +1,13 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create]
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
-    #Retrives all messages and divides into two groups todays messages and other messages
-    @grouped_events = @events.group_by{ |t| t.event_datetime.to_date == DateTime.now.to_date }
-
-    if @grouped_events[false].present?
-      #Create month wise groups of messages      
-      @month_wise_sorted_alerts  = @grouped_events[false].group_by{ |t| t.event_datetime.to_date}
-    end 
+    @events = @events.order("event_datetime ASC")      
+    @grouped_events = @events.group_by{ |t| t.event_datetime.to_date} 
   end
 
   # GET /events/1
@@ -77,6 +73,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :event_datetime)
+      params.require(:event).permit(:title, :event_datetime, :recurring)
     end
 end

@@ -46,6 +46,7 @@ gem 'simple_form'
 gem 'groupdate'
 
 gem 'font-awesome-rails', '~> 4.7'
+gem 'recurring_select'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

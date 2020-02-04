@@ -1,8 +1,11 @@
-= form_for(@event) do |f|
+= form_for(event) do |f|
   .form-group
   	= f.label :title
     = f.text_field :title, autofocus: true, class: "form-control"
   .form-group
+  	= f.label :datetime
     = f.datetime_select :event_datetime, class: "form-control"
+  / .form-group
+  / 	= f.select_recurring :recurring
   .actions
     = f.submit "Save", class: "btn btn-primary"
